@@ -7,7 +7,7 @@ import (
 )
 
 var unixDays []int
-var ZERO time.Time = time.Unix(0, 0)
+var ZERO time.Time
 var loc *time.Location
 
 func DayStr(d int) string {
@@ -42,6 +42,8 @@ func InitStr(ds []string, format string) error {
 
 //Inicializa função com Array de de time.Time
 func Init(ndays []time.Time) {
+	loc, _ = time.LoadLocation("UTC")
+	ZERO = time.Unix(0, 0).In(loc)
 	unixDays = make([]int, 0)
 	for _, d := range ndays {
 		intd := DayInt(d)
